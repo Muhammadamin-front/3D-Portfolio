@@ -86,11 +86,11 @@ img {
 }
 
 .hero-heading .heading-text-roll-layer {
-  background: linear-gradient(180deg, #646973 0%, #bbccd7 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
+  background: none;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  -webkit-text-fill-color: #aebdc8;
+  color: #aebdc8;
 }
 
 .contact-button {
