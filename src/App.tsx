@@ -1,4 +1,5 @@
 import {
+  AnimatePresence,
   motion,
   useMotionValue,
   useReducedMotion,
@@ -9,6 +10,7 @@ import {
 } from 'motion/react'
 import { ArrowUpRight } from 'lucide-react'
 import { HeadingTextRolls } from './components/heading-text-rolls'
+import { PwaInstall } from './components/pwa-install'
 import {
   CSSProperties,
   PropsWithChildren,
@@ -42,6 +44,7 @@ const marqueeImages = [
 ]
 
 const contactHref = 'mailto:hello@madamin.design'
+const INTRO_DURATION_MS = 1850
 
 const services = [
   {
@@ -124,6 +127,44 @@ function FadeIn({ children, className, delay = 0, duration = 0.7, x = 0, y = 30,
     >
       {children}
     </motion.div>
+  )
+}
+
+function IntroScreen({ visible, reducedMotion }: { visible: boolean; reducedMotion: boolean }) {
+  return (
+    <AnimatePresence>
+      {visible ? (
+        <motion.div
+          aria-hidden="true"
+          className="fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden bg-[#0C0C0C] px-6"
+          initial={{ opacity: 1 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{
+            duration: reducedMotion ? 0 : 0.85,
+            ease: [0.22, 1, 0.36, 1],
+          }}
+        >
+          <motion.p
+            className="hero-heading whitespace-nowrap text-center text-[clamp(0.85rem,3vw,2.25rem)] font-black uppercase leading-none"
+            initial={
+              reducedMotion
+                ? false
+                : { opacity: 0, y: 16, filter: 'blur(8px)', letterSpacing: '0.34em' }
+            }
+            animate={{ opacity: 1, y: 0, filter: 'blur(0px)', letterSpacing: '0.24em' }}
+            exit={{ opacity: 0, y: -10, filter: 'blur(5px)' }}
+            transition={{
+              duration: reducedMotion ? 0 : 0.9,
+              delay: reducedMotion ? 0 : 0.12,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+          >
+            Welcome to my world
+          </motion.p>
+        </motion.div>
+      ) : null}
+    </AnimatePresence>
   )
 }
 
@@ -252,13 +293,13 @@ function HeroSection() {
         </FadeIn>
       </div>
 
-      <div className="pointer-events-none absolute left-1/2 top-1/2 z-10 w-[min(72vw,300px)] -translate-x-1/2 -translate-y-1/2 sm:bottom-0 sm:top-auto sm:w-[360px] sm:translate-y-0 md:w-[430px] lg:w-[460px] xl:w-[520px]">
+      <div className="pointer-events-none absolute left-1/2 top-1/2 z-10 w-[min(82vw,360px)] -translate-x-1/2 -translate-y-1/2 sm:bottom-0 sm:top-auto sm:w-[430px] sm:translate-y-0 md:w-[510px] lg:w-[560px] xl:w-[630px]">
         <FadeIn delay={0.6} y={30} className="w-full">
           <Magnet padding={150} strength={3} activeTransition="transform 0.3s ease-out" inactiveTransition="transform 0.6s ease-in-out" className="pointer-events-auto w-full">
             <img
-              src="https://shrug-person-78902957.figma.site/_components/v2/d24c01ad3a56fc65e942a1f501eb73db42d7cf9a/Rectangle_40443.81459862.png"
-              alt="Madamin, 3D creator"
-              className="h-auto w-full select-none object-contain"
+              src="/images/it-girl-hero.png"
+              alt="IT Girl, 3D creator"
+              className="h-auto w-full select-none object-contain [filter:drop-shadow(0_18px_44px_rgba(118,33,176,0.2))]"
               draggable={false}
               loading="eager"
               decoding="async"
@@ -533,25 +574,61 @@ function ProjectsSection() {
 }
 
 export default function App() {
+  const reducedMotion = useReducedMotion()
+  const [introComplete, setIntroComplete] = useState(false)
+
   useEffect(() => {
     if (typeof document === 'undefined') return
+
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+
+    const timer = window.setTimeout(
+      () => {
+        document.body.style.overflow = previousOverflow
+        setIntroComplete(true)
+      },
+      reducedMotion ? 250 : INTRO_DURATION_MS,
+    )
+
+    return () => {
+      window.clearTimeout(timer)
+      document.body.style.overflow = previousOverflow
+    }
+  }, [reducedMotion])
+
+  useEffect(() => {
+    if (typeof document === 'undefined' || !introComplete) return
+
     document.documentElement.classList.add('ready')
 
     return () => {
       document.documentElement.classList.remove('ready')
     }
-  }, [])
+  }, [introComplete])
 
   return (
     <>
+      <IntroScreen visible={!introComplete} reducedMotion={Boolean(reducedMotion)} />
       <HeadingTextRolls />
-      <main id="public-view" className="overflow-x-clip bg-[#0C0C0C]">
+      <PwaInstall />
+      <motion.main
+        id="public-view"
+        aria-hidden={!introComplete}
+        className="overflow-x-clip bg-[#0C0C0C]"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: introComplete ? 1 : 0 }}
+        transition={{
+          duration: reducedMotion ? 0 : 0.95,
+          ease: [0.22, 1, 0.36, 1],
+        }}
+      >
         <HeroSection />
         <MarqueeSection />
         <AboutSection />
         <ServicesSection />
         <ProjectsSection />
-      </main>
+      </motion.main>
     </>
   )
 }

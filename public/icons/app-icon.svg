@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">IT Girl 3D Creator</title>
+  <desc id="desc">A dark premium app icon with silver IT lettering and a violet glow.</desc>
+  <defs>
+    <linearGradient id="bg" x1="80" y1="30" x2="430" y2="490" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#202027"/>
+      <stop offset="0.52" stop-color="#0C0C0C"/>
+      <stop offset="1" stop-color="#160717"/>
+    </linearGradient>
+    <linearGradient id="metal" x1="256" y1="108" x2="256" y2="350" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F4FAFF"/>
+      <stop offset="0.4" stop-color="#BAC9D4"/>
+      <stop offset="1" stop-color="#68707C"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="114" y1="400" x2="403" y2="370" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#B600A8"/>
+      <stop offset="0.52" stop-color="#7621B0"/>
+      <stop offset="1" stop-color="#BE4C00"/>
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="20"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" fill="#0C0C0C"/>
+  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
+  <circle cx="256" cy="272" r="178" fill="#A500AF" opacity="0.18" filter="url(#glow)"/>
+  <rect x="26" y="26" width="460" height="460" rx="92" fill="none" stroke="#D7E2EA" stroke-opacity="0.16" stroke-width="3"/>
+  <text x="256" y="324" text-anchor="middle" fill="url(#metal)" font-family="Arial, Helvetica, sans-serif" font-size="250" font-weight="900" letter-spacing="-28">IT</text>
+  <rect x="106" y="374" width="300" height="8" rx="4" fill="url(#accent)"/>
+  <text x="256" y="420" text-anchor="middle" fill="#D7E2EA" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="700" letter-spacing="8">3D CREATOR</text>
+</svg>

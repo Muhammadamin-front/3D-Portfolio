@@ -3,11 +3,11 @@
 import { motion, useReducedMotion } from "motion/react"
 import { Fragment, useMemo } from "react"
 
-const ROLL_DURATION = 0.42
-const LETTER_STAGGER = 0.035
-const SECOND_LAYER_DELAY = 0.14
-const LOOP_PAUSE = 1.6
-const WORD_DELAY_FACTOR = 0.018
+const ROLL_DURATION = 0.525
+const LETTER_STAGGER = 0.04375
+const SECOND_LAYER_DELAY = 0.175
+const LOOP_PAUSE = 2
+const WORD_DELAY_FACTOR = 0.0225
 const ROLL_EASE = [0.22, 1, 0.36, 1] as const
 
 export interface TextRollProps {
