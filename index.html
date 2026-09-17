@@ -14,6 +14,17 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <script>
+      window.__itGirlInstallPrompt = null
+      window.addEventListener('beforeinstallprompt', function (event) {
+        event.preventDefault()
+        window.__itGirlInstallPrompt = event
+        window.dispatchEvent(new Event('it-girl-install-ready'))
+      })
+      window.addEventListener('appinstalled', function () {
+        window.__itGirlInstallPrompt = null
+      })
+    </script>
     <title>IT Girl -- 3D Creator</title>
   </head>
   <body>

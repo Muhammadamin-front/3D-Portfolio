@@ -14,6 +14,7 @@ export default defineConfig({
         'icons/pwa-512x512.png',
       ],
       manifest: {
+        id: '/',
         name: 'IT Girl — 3D Creator',
         short_name: 'IT Girl',
         description: 'A premium 3D creator portfolio by Madamin.',
@@ -26,19 +27,19 @@ export default defineConfig({
         orientation: 'any',
         icons: [
           {
-            src: 'icons/pwa-192x192.png',
+            src: '/icons/pwa-192x192.png',
             sizes: '192x192',
             type: 'image/png',
             purpose: 'any',
           },
           {
-            src: 'icons/pwa-512x512.png',
+            src: '/icons/pwa-512x512.png',
             sizes: '512x512',
             type: 'image/png',
             purpose: 'any',
           },
           {
-            src: 'icons/pwa-512x512.png',
+            src: '/icons/pwa-512x512.png',
             sizes: '512x512',
             type: 'image/png',
             purpose: 'maskable',
