@@ -286,11 +286,11 @@ function HeroSection() {
       </FadeIn>
 
       <div className="relative z-0 overflow-hidden">
-        <FadeIn delay={0.15} y={40}>
+        <div>
           <h1 id="hero-title" className="hero-heading hero-title mt-7 w-full whitespace-nowrap text-center font-black uppercase leading-[0.88] sm:mt-8 md:mt-5">
             Hi i&apos;m it girl
           </h1>
-        </FadeIn>
+        </div>
       </div>
 
       <div className="pointer-events-none absolute left-1/2 top-1/2 z-10 w-[min(82vw,360px)] -translate-x-1/2 -translate-y-1/2 sm:bottom-0 sm:top-auto sm:w-[430px] sm:translate-y-0 md:w-[510px] lg:w-[560px] xl:w-[630px]">
